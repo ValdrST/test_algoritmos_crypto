@@ -1,0 +1,20 @@
+version: "3.7"
+services:
+  prueba-crypto:
+    build: src/
+    container_name: prueba-crypto
+    networks:
+      - prueba-crypto
+    volumes:
+      - ./results:/results
+      - ./entrypoint:/entrypoint
+      - ./test_vectors:/test_vectors
+    entrypoint: ["/bin/sh","/entrypoint/run.sh"]
+networks:
+  prueba-crypto:
+      driver: bridge
+      ipam:
+        config:
+          - subnet: 172.16.90.0/24
+      
+      

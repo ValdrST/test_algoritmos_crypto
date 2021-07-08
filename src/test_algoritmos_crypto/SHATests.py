@@ -1,20 +1,21 @@
 import hashlib
 import time
-from TestVector import TestVector
-from Results import Results
+from os import path
+from .TestVector import TestVector
+from .Results import Results
 
 class SHATests(object):
-    def __init__(self,test_folder='/tests_vectors/'):
+    def __init__(self,test_folder='/tests_vectors/', out_folder='./'):
         self.tiempos = {
             'sha2-384':[],
             'sha2-512':[],
             'sha3-384':[],
             'sha2-512':[],
         }
-        tv = TestVector(dirVectores=test_folder,archivoVectores=test_folder+'sha_2_3_384_512_vectors.csv',tipo='sha')
+        tv = TestVector(dirVectores=test_folder,archivoVectores= path.join(test_folder,'sha_2_3_384_512_vectors.csv'),tipo='sha')
         tv.parseVectores()
         self.vectores = tv.datos
-        self.resultados = Results(dirResultados='./')
+        self.resultados = Results(dirResultados=out_folder,nombre='sha_res.csv')
     
     def armarResultado(self, tiempo, nombre, tipo):
         res = {
