@@ -15,20 +15,16 @@ class SHATests(object):
         tv = TestVector(dirVectores=test_folder,archivoVectores= path.join(test_folder,'sha_2_3_384_512_vectors.csv'),tipo='sha')
         tv.parseVectores()
         self.vectores = tv.datos
-        self.resultados = Results(dirResultados=out_folder,nombre='sha_res.csv')
+        self.resultados = Results(dirResultados=out_folder,nombre='hash_res.csv')
+        self.res = {}
     
     def armarResultado(self, tiempo, nombre, tipo):
-        res = {
-            'nombre': nombre,
-            'tiempo':tiempo,
-            'tipo':tipo
-        }
-        self.resultados.añadirResultado(res)
-        return res
+      self.res[tipo] = tiempo
 
 
     def correrPrueba(self):
         for vector in self.vectores:
+            self.res['nombre'] = vector['nombre']
             start = time.process_time()
             SHA2 = hashlib.sha384(vector['vector']).hexdigest()
             end = time.process_time()
@@ -49,6 +45,7 @@ class SHATests(object):
             end = time.process_time()
             tiempo = end - start
             self.armarResultado(tiempo, vector['nombre'],'sha3_512')
+            self.resultados.añadirResultado(self.res)
         self.resultados.escribirResultados()
 
 

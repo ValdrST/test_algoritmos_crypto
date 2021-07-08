@@ -19,15 +19,10 @@ class AESTests(object):
         tv.parseVectores()
         self.vectores = tv.datos
         self.resultados = Results(dirResultados=out_folder, nombre='aes_res.csv')
+        self.res = { }
     
     def armarResultado(self, tiempo, nombre, tipo):
-        res = {
-            'nombre': nombre,
-            'tiempo':tiempo,
-            'tipo':tipo
-        }
-        self.resultados.añadirResultado(res)
-        return res
+      self.res[tipo] = tiempo
 
     def aes_cbd_encrypt(self, key, data):
       cipher = AES.new(key, AES.MODE_CBC)
@@ -50,6 +45,7 @@ class AESTests(object):
 
     def correrPrueba(self):
       for vector in self.vectores:
+        self.res['nombre'] = vector['nombre']
         key = get_random_bytes(32)
         start = time.process_time()
         AES_CBD_E, iv = self.aes_cbd_encrypt(key,vector['vector'])
@@ -74,6 +70,7 @@ class AESTests(object):
         end = time.process_time()
         tiempo = end - start
         self.armarResultado(tiempo, vector['nombre'],'aes-ecb-decrypt')
+        self.resultados.añadirResultado(self.res)
       self.resultados.escribirResultados()
 
 

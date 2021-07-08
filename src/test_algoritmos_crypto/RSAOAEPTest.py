@@ -16,15 +16,10 @@ class RSAOAEPTest(object):
         tv.parseVectores()
         self.vectores = tv.datos
         self.resultados = Results(dirResultados=out_folder, nombre='rsa_oaep_res.csv')
+        self.res = { }
     
     def armarResultado(self, tiempo, nombre, tipo):
-        res = {
-            'nombre': nombre,
-            'tiempo':tiempo,
-            'tipo':tipo
-        }
-        self.resultados.añadirResultado(res)
-        return res
+      self.res[tipo] = tiempo
 
     def rsa_oaep_encrypt(self, data, n, e, d):
       privateKey = RSA.construct((n, e, d))
@@ -51,16 +46,18 @@ class RSAOAEPTest(object):
         n = int(vector['modulo'], 16)
         e = int(vector['exponente_publico'], 16)
         d = int(vector['exponente_privado'], 16)
+        self.res['nombre'] = vector['nombre']
         ct, key, tiempo = self.rsa_oaep_encrypt(vector['vector'], n, e, d)
         self.armarResultado(tiempo, vector['nombre'],'rsa-oaep-encrypt')
         
         tiempo = self.rsa_oaep_decrypt(ct, key)
         self.armarResultado(tiempo, vector['nombre'],'rsa-oaep-decrypt')
+        self.resultados.añadirResultado(self.res)
       self.resultados.escribirResultados()
 
 
 
 if __name__ == '__main__':
-  at = AESTests('../../test_vectors/')
+  at = RSAOAEPTest('../../test_vectors/')
   at.correrPrueba()
     

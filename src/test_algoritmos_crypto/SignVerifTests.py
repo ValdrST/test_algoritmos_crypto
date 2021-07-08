@@ -26,15 +26,10 @@ class SignVerifTests(object):
       tv.parseVectores()
       self.vectores = tv.datos
       self.resultados = Results(dirResultados=out_folder, nombre='rsa_sign_verif_res.csv')
+      self.res = {}
     
   def armarResultado(self, tiempo, nombre, tipo):
-      res = {
-          'nombre': nombre,
-          'tiempo':tiempo,
-          'tipo':tipo
-      }
-      self.resultados.añadirResultado(res)
-      return res
+    self.res[tipo] = tiempo
 
   def rsa_pss_sign(self, data, n, e, d):
     privateKeyRSA = RSA.construct((n, e, d))
@@ -117,6 +112,7 @@ class SignVerifTests(object):
 
   def correrPrueba(self):
     for vector in self.vectores:
+      self.res['nombre'] = vector['nombre']
       n = int(vector['modulo'], 16)
       e = int(vector['exponente_publico'], 16)
       d = int(vector['exponente_privado'], 16)
@@ -143,6 +139,7 @@ class SignVerifTests(object):
 
       tiempo = self.rsa_pss_verif(firma, hashValue, controler)
       self.armarResultado(tiempo, vector['nombre'],'rsa-pss-verif')
+      self.resultados.añadirResultado(self.res)
     self.resultados.escribirResultados()
 
 
