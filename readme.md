@@ -13,7 +13,7 @@ Se corre el siguente comando cada que se quiera ejecutar
 ```
 $ docker-compose up
 ```
-Los resultados de la ejecucion se encontrarán en el directorio `./results`
+Los resultados de la ejecucion se encontrarán en el directorio [results](./results)
 
 ## Descripción
 Es un proyecto para la materia de criptografia semestere 2021-2
