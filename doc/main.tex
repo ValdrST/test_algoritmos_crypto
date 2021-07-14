@@ -1,6 +1,9 @@
 \documentclass{IEEEtran}
 
 \include{meta/conf}
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
 \usepackage{authblk}
 
 \begin{document}
@@ -20,6 +23,137 @@
     \IEEEauthorrefmark{4}author.four@add.on.net}}
 
 \maketitle{}
+
+\tableofcontents{}
+
+\hypertarget{test-de-algoritmos-criptograficos}{%
+  \section{Test de algoritmos
+    criptograficos}\label{test-de-algoritmos-criptograficos}}
+
+\hypertarget{instrucciones-de-uso}{%
+  \subsection{Instrucciones de uso}\label{instrucciones-de-uso}}
+
+Hay que tener docker y docker-compose instalado
+
+Se corre el siguiente comando la primera ves que se utiliza
+
+\begin{verbatim}
+$ docker-compose build
+\end{verbatim}
+
+Se corre el siguente comando cada que se quiera ejecutar
+
+\begin{verbatim}
+$ docker-compose up
+\end{verbatim}
+
+Los resultados de la ejecucion se encontrarán en el directorio
+\href{./results}{results}
+
+\hypertarget{descripciuxf3n}{%
+  \subsection{Descripción}\label{descripciuxf3n}}
+
+Es un proyecto para la materia de criptografia semestere 2021-2
+
+\hypertarget{contenido}{%
+  \subsubsection{Contenido}\label{contenido}}
+
+\hypertarget{algoritmos-a-probar}{%
+  \paragraph{Algoritmos a probar}\label{algoritmos-a-probar}}
+
+\begin{itemize}
+        \tightlist
+  \item
+        AES-EBC 256 bits
+  \item
+        AES-CBC 256 bits
+  \item
+        SHA-2 384 bits
+  \item
+        SHA-2 512 bits
+  \item
+        SHA-3 512 bits
+  \item
+        RSA-OAEP 1024 bits
+  \item
+        RSA-PSS 1024 bits
+  \item
+        DSA 1024 bits
+  \item
+        ECDSA Prime Field 521 bits
+  \item
+        ECDSA Binary Field 571 bits
+\end{itemize}
+
+\hypertarget{operaciones-a-probar}{%
+  \paragraph{Operaciones a probar}\label{operaciones-a-probar}}
+
+\begin{itemize}
+        \tightlist
+  \item
+        Cifrado
+  \item
+        Decifrado
+  \item
+        Hashing
+  \item
+        Firmado
+  \item
+        Verificación
+\end{itemize}
+
+\hypertarget{clasificaciuxf2n-de-operaciones}{%
+  \subsubsection{Clasificaciòn de
+    operaciones}\label{clasificaciuxf2n-de-operaciones}}
+
+\hypertarget{cifrado-y-decifrado}{%
+  \paragraph{Cifrado y decifrado}\label{cifrado-y-decifrado}}
+
+En esta clasificaciòn se encuentran:
+
+\begin{itemize}
+        \tightlist
+  \item
+        AES-EBC 256 bits
+  \item
+        AES-CBC 256 bits
+  \item
+        RSA-OAEP 1024 bits
+\end{itemize}
+
+Este ultimo no es comparable con AES-EBC y CBC
+
+\hypertarget{hashing}{%
+  \paragraph{Hashing}\label{hashing}}
+
+En esta clasificaciòn se encuentra:
+
+\begin{itemize}
+        \tightlist
+  \item
+        SHA-2 384 bits
+  \item
+        SHA-2 512 bits
+  \item
+        SHA-3 512 bits
+\end{itemize}
+
+\hypertarget{firma-y-verificacion}{%
+  \paragraph{Firma y verificacion}\label{firma-y-verificacion}}
+
+Aqui se encuentran:
+
+\begin{itemize}
+        \tightlist
+  \item
+        RSA-PSS 1024 bits
+  \item
+        DSA 1024 bits
+  \item
+        ECDSA Prime Field 521 bits
+  \item
+        ECDSA Binary Field 571 bits
+\end{itemize}
 
 
 \end{document}
