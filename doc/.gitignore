@@ -8,3 +8,6 @@ tmp/
 *.out
 *.log
 .auctex-auto/
+*.synctex.gz
+*.toc
+*.pdf
