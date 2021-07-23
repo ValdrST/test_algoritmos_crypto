@@ -11,3 +11,9 @@ tmp/
 *.synctex.gz
 *.toc
 *.pdf
+
+_minted-main/
+*.bbl
+*.bcf
+*.blg
+*.run.xml
