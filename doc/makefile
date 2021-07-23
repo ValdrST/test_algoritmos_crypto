@@ -5,7 +5,8 @@
 # @version 0.1
 
 make:
-	pdflatex  -shell-escape -interaction nonstopmode  main.tex && \
-	pdflatex  -shell-escape -interaction nonstopmode  main.tex
+	pdflatex  -shell-escape -interaction nonstopmode  main && \
+	biber main && \
+	pdflatex  -shell-escape -interaction nonstopmode  main
 
 # end
