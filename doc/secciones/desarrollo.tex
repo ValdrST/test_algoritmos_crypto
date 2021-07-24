@@ -3,109 +3,64 @@
 
 \section{Desarrollo}\label{sec:desarrollo}
 
+Para tener un aislamiento de recursos se utiliza \href{https://www.docker.com/}{docker} y asi tener un entorno limpio
+de trabajo para poder analizar de mejor manera los resultados de cada prueba.
+
 \subsection{Test de algoritmos criptográficos}\label{test-de-algoritmos-criptograficos}
 
 \subsubsection{Instrucciones de uso}\label{instrucciones-de-uso}
 
-Hay que tener docker y docker-compose instalado
+Hay que tener \texttt{docker} y \texttt{docker-compose} instalado
 
-Se corre el siguiente comando la primera ves que se utiliza
-
+Se corre el siguiente comando la primera vez que se utiliza
 
 \begin{code}
 \begin{minted}{shell-session}
 $ docker-compose build
 \end{minted}
 \end{code}
-
 Se corre el siguiente comando cada que se quiera ejecutar
-
 \begin{code}
 \begin{minted}{shell-session}
 $ docker-compose up
 \end{minted}
 \end{code}
+Los resultados de la ejecución se encontrarán en el directorio \texttt{./results/}
+(tomando la raíz del proyecto):
 
-Los resultados de la ejecución se encontrarán en el directorio
-\href{./results}{results}
-
-\subsection{Algoritmos y operaciones a probar}\label{algoritmos-a-probar}
-
-\begin{itemize}
-  \item Estándar de cifrado avanzado (AES por sus siglas en ingles)
-        \begin{itemize}
-          \item AES-EBC 256 bits
-          \item AES-CBC 256 bits
-          \item RSA-OAEP 1024 bits
-        \end{itemize}
-  \item Algoritmo hash seguro
-        \begin{itemize}
-          \item SHA-2 384 bits
-          \item SHA-2 512 bits
-          \item SHA-3 512 bits
-        \end{itemize}
-  \item Firma y verificacion
-        \begin{itemize}
-          \item RSA-PSS 1024 bits
-          \item DSA 1024 bits
-          \item ECDSA Prime Field 521 bits
-          \item ECDSA Binary Field 571 bits
-        \end{itemize}
-\end{itemize}
-
-
-\subsection{Operaciones a probar}\label{operaciones-a-probar}
-
-\begin{itemize}
-  \item Cifrado
-  \item Descifrado
-  \item Hashing
-  \item Firmado
-  \item Verificación
-\end{itemize}
-
-
-
-\subsection{Clasificación de operaciones}\label{clasificaciuxf2n-de-operaciones}
+\subsection{Operaciones y probar}\label{clasificaciuxf2n-de-operaciones}
 \subsubsection{Cifrado y descifrado}\label{sec:cifrado-y-descifrado}
-
 En esta clasificación se encuentran:
-
+\begin{multicols}{2}
 \begin{itemize}
   \item AES-EBC 256 bits
   \item AES-CBC 256 bits
   \item RSA-OAEP\footnote{Este ultimo no es comparable con AES-EBC y CBC} 1024 bits
 \end{itemize}
-
-
-
-
 \subsubsection{Hashing}\label{hashing}
-
 En esta clasificación se encuentra:
-
 \begin{itemize}
   \item SHA-2 384 bits
   \item SHA-2 512 bits
   \item SHA-3 512 bits
 \end{itemize}
-
-
 \subsubsection{Firma y verificación}\label{firma-y-verificacion}
-
 Aquí se encuentran:
-
 \begin{itemize}
   \item RSA-PSS 1024 bits
   \item DSA 1024 bits
   \item ECDSA Prime Field 521 bits
   \item ECDSA Binary Field 571 bits
 \end{itemize}
+\end{multicols}
+
+\newpage{}
 
 \subsubsection{Resultados}\label{sec:resultados}
-
 \paragraph{Cifrado y decifrado}\label{sec:aes_res}
-\begin{table*}[]
+En la siguiente tabla~\ref{tab:aes} se comparán los algoritmos de AES, el AES-CBC vs AES-ECB, ambos realizando
+el cifrado y el desifrado (tomando el tiempo como segundos $[s]$).
+\begin{table}[H]
   \centering
   \caption{Resultados AES}\label{tab:aes}
   \begin{tabular}{|m{4.3cm}<{\centering}|m{2cm}<{\centering}|m{2cm}<{\centering}|m{2cm}<{\centering}|m{2cm}<{\centering}|}
@@ -125,13 +80,23 @@ Aquí se encuentran:
     \rowcolor[HTML]{C0C0C0}
     zip de prueba & $\num{9.73E-03}$ & $\num{8.26E-03}$ & $\num{4.75E-03}$ & $\num{2.04E-03}$ \\ \hline
   \end{tabular}
-\end{table*}
-
-\begin{figure}
+\end{table}
+Graficamente, en la figura~\ref{fig:aes}, se ve una clara ventaja del AES-ECB siendo más rapido que AES-CBC, sin embargo, el
+AES-ECB es más suceptible de revelar patrones de texto que cualquier otro método (figura~\ref{fig:ejem}).
+\begin{figure}[H]
+\begin{subfigure}[b]{0.6\textwidth}
   \centering
-  \includegraphics[width=0.8\textwidth]{aes-res-res}
+  \includegraphics[width=\textwidth]{aes-res-res}
   \caption{Resultado AES}\label{fig:aes}
+\end{subfigure}
+\hfill{}
+\begin{subfigure}[b]{0.4\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{ecb}
+  \caption{Versión de mapa de bits de una imagen cifrado de dos distintas maneras}\label{fig:ejem}
+\end{subfigure}
 \end{figure}
+El modo ECB puede hacer que protocolos sin protección de integridad sean aún más susceptibles a ataques de repetición, dado que cada bloque es descifrado de la misma manera
 
 \begin{table*}[]
   \centering
@@ -171,14 +136,20 @@ Aquí se encuentran:
     vector\#20 & $\num{398.33E-06}$ & $\num{750.11E-06}$ \\ \hline
   \end{tabular}
 \end{table*}
-
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{rsa-oaep-res}
   \caption{Resultado RSA\_OAEP}\label{fig:rsa-oaep}
 \end{figure}
 
+\newpage{}
+
 \subsubsection{Hashing}\label{sec:hash}
+En este apartado comparamos sumas hash, donde probamos con caracteres de diferente tamaño
+y dos tipos de binarios distintos, como es esperado, las operaciones de 384 bits son más eficientes
+que las operacionesde 512 bits. También es notoria la diferencia de tiempo de SHA-3 y SHA-2, siendo esta
+última más veloz, sin embargo, el SHA-3 se puede implementar a través de hardware, por lo que
+entonces el SHA-3 puede ser igual de rápido e incluso más rápido que el SHA-2
 \begin{table*}[]
   \centering
   \caption{Resultados Hash}\label{tab:hash-res}
@@ -201,13 +172,11 @@ Aquí se encuentran:
     zip de prueba              & $\num{5.40E-03 }$  & $\num{5.07E-03 }$  & $\num{11.61E-03}$  & $\num{16.93E-03}$  \\ \hline
   \end{tabular}
 \end{table*}
-
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{hash_res}
   \caption{Resultado Hash}\label{fig:hash}
 \end{figure}
-
 
 \subsubsection{Firma y verificacion}\label{sec:firma-y-verificacion}
 \begin{table*}[]
@@ -256,22 +225,16 @@ Aquí se encuentran:
     vector\#19 & $\num{2.30E-03}$ & $\num{4.39E-03}$ & $\num{3.60E-04}$ & $\num{6.75E-04}$ & $\num{4.31E-04}$ & $\num{2.95E-04}$ & $\num{6.67E-04}$ & $\num{2.70E-04}$ \\ \hline
     \rowcolor[HTML]{C0C0C0}
     vector\#20 & $\num{2.26E-03}$ & $\num{4.99E-03}$ & $\num{4.13E-04}$ & $\num{6.78E-04}$ & $\num{3.99E-04}$ & $\num{2.93E-04}$ & $\num{6.97E-04}$ & $\num{2.74E-04}$ \\ \hline
-
   \end{tabular}
 \end{table*}
-
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{rsa_sign_verif_res}
   \caption{Resultado Firma y verificación}\label{fig:fyv}
 \end{figure}
-
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{rsa_sign_verif-bin_res}
   \caption{Resultado Firma y verificación (binario)}\label{fig:fyvbin}
 \end{figure}
-
-
-
 \end{document}
