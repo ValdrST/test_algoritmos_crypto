@@ -3,7 +3,7 @@
 
 \section{Desarrollo}\label{sec:desarrollo}
 
-Para tener un aislamiento de recursos se utiliza \href{https://www.docker.com/}{docker} y asi tener un entorno limpio
+Para tener un aislamiento de recursos se utiliza \href{https://www.docker.com/}{docker} y así tener un entorno limpio
 de trabajo para poder analizar de mejor manera los resultados de cada prueba.
 
 \subsection{Test de algoritmos criptográficos}\label{test-de-algoritmos-criptograficos}
@@ -31,12 +31,23 @@ Los resultados de la ejecución se encontrarán en el directorio \texttt{./resul
 \subsection{Operaciones y probar}\label{clasificaciuxf2n-de-operaciones}
 \subsubsection{Cifrado y descifrado}\label{sec:cifrado-y-descifrado}
 En esta clasificación se encuentran:
-\begin{multicols}{2}
 \begin{itemize}
   \item AES-EBC 256 bits
   \item AES-CBC 256 bits
   \item RSA-OAEP\footnote{Este ultimo no es comparable con AES-EBC y CBC} 1024 bits
 \end{itemize}
+Se usan bibliotecas ya escritas para ejecutar las pruebas:
+\begin{code}
+  \caption{Código que ejecuta las pruebas de AES}\label{sec:cifrado-y-descifrado-1}
+  \inputminted[lastline=74]{python}{../src/test_algoritmos_crypto/AESTests.py}
+\end{code}
+
+\textit{RSA\_OAEP} también se usa para firmar, verificar, cifrar y verificar.
+\begin{code}
+  \caption{Código que ejecuta las pruebas de RSA\_OAEP}\label{sec:cifrado-y-descifrado-2}
+  \inputminted[lastline=59]{python}{../src/test_algoritmos_crypto/RSAOAEPTest.py}
+\end{code}
+
 \subsubsection{Hashing}\label{hashing}
 En esta clasificación se encuentra:
 \begin{itemize}
@@ -44,6 +55,11 @@ En esta clasificación se encuentra:
   \item SHA-2 512 bits
   \item SHA-3 512 bits
 \end{itemize}
+\begin{code}
+  \caption{Código que ejecuta las pruebas SHA2 y SHA3}\label{sec:hashing}
+  \inputminted[lastline=49]{python}{../src/test_algoritmos_crypto/SHATests.py}
+\end{code}
+
 \subsubsection{Firma y verificación}\label{firma-y-verificacion}
 Aquí se encuentran:
 \begin{itemize}
@@ -52,18 +68,24 @@ Aquí se encuentran:
   \item ECDSA Prime Field 521 bits
   \item ECDSA Binary Field 571 bits
 \end{itemize}
-\end{multicols}
+\begin{code}
+  \caption{Código que ejecuta las pruebas firma y verificación}\label{sec:firma-y-verificacion-1}
+  \inputminted[lastline=49]{python}{../src/test_algoritmos_crypto/SignVerifTests.py}
+\end{code}
 
 \newpage{}
 
 \subsubsection{Resultados}\label{sec:resultados}
-\paragraph{Cifrado y decifrado}\label{sec:aes_res}
-En la siguiente tabla~\ref{tab:aes} se comparán los algoritmos de AES, el AES-CBC vs AES-ECB, ambos realizando
-el cifrado y el desifrado (tomando el tiempo como segundos $[s]$).
+
+En esta sección mostramos los resultados generados.
+
+\paragraph{Cifrado y descifrado}\label{sec:aes_res}
+En la siguiente tabla~\ref{tab:aes} se comparan los algoritmos de AES, el AES-CBC vs AES-ECB, ambos realizando
+el cifrado y el descifrado (tomando el tiempo como segundos $[s]$).
 \begin{table}[H]
   \centering
   \caption{Resultados AES}\label{tab:aes}
-  \begin{tabular}{|m{4.3cm}<{\centering}|m{2cm}<{\centering}|m{2cm}<{\centering}|m{2cm}<{\centering}|m{2cm}<{\centering}|}
+  \begin{tabular}{|c|c|c|c|c|}
     \hline
     \rowcolor[HTML]{000000}
     {\color[HTML]{FFFFFF} Nombre} & \multicolumn{1}{l|}{\cellcolor[HTML]{000000}{\color[HTML]{FFFFFF} aes-cbc-encrypt}} & \multicolumn{1}{l|}{\cellcolor[HTML]{000000}{\color[HTML]{FFFFFF} aes-cbc-decrypt}} & \multicolumn{1}{l|}{\cellcolor[HTML]{000000}{\color[HTML]{FFFFFF} aes-ecb-encrypt}} & \multicolumn{1}{l|}{\cellcolor[HTML]{000000}{\color[HTML]{FFFFFF} aes-ecb-decrypt}} \\ \hline
@@ -81,10 +103,12 @@ el cifrado y el desifrado (tomando el tiempo como segundos $[s]$).
     zip de prueba & $\num{9.73E-03}$ & $\num{8.26E-03}$ & $\num{4.75E-03}$ & $\num{2.04E-03}$ \\ \hline
   \end{tabular}
 \end{table}
-Graficamente, en la figura~\ref{fig:aes}, se ve una clara ventaja del AES-ECB siendo más rapido que AES-CBC, sin embargo, el
-AES-ECB es más suceptible de revelar patrones de texto que cualquier otro método (figura~\ref{fig:ejem}).
-\begin{figure}[H]
-\begin{subfigure}[b]{0.6\textwidth}
+
+Gráficamente, en la figura~\ref{fig:aes}, se ve una clara ventaja del AES-ECB siendo más rápido que AES-CBC, sin embargo, el
+AES-ECB es más susceptible de revelar patrones de texto que cualquier otro método (figura~\ref{fig:ejem}).
+
+\begin{figure}
+\begin{subfigure}[b]{0.55\textwidth}
   \centering
   \includegraphics[width=\textwidth]{aes-res-res}
   \caption{Resultado AES}\label{fig:aes}
@@ -95,13 +119,30 @@ AES-ECB es más suceptible de revelar patrones de texto que cualquier otro méto
   \includegraphics[width=\textwidth]{ecb}
   \caption{Versión de mapa de bits de una imagen cifrado de dos distintas maneras}\label{fig:ejem}
 \end{subfigure}
+% \caption{Resultados AES}
 \end{figure}
-El modo ECB puede hacer que protocolos sin protección de integridad sean aún más susceptibles a ataques de repetición, dado que cada bloque es descifrado de la misma manera
 
-\begin{table*}[]
-  \centering
+\newpage{}
+
+
+El modo ECB puede hacer que protocolos sin protección de integridad sean aún más
+susceptibles a ataques de repetición, dado que cada bloque es descifrado de la misma
+manera.
+
+También se compara el algoritmo \textbf{RSA\_OAEP}, este también tiene los métodos
+de cifrado y descifrado, sin embargo este es sumamente más lento a comparación
+de las anteriores, \textbf{RSA\_OAEP} también sirve para firma y verificación
+(apartado~\ref{sec:firma-y-verificacion}).
+\begin{figure}[ht]
+  \centering{}
+  \includegraphics[width=0.6\textwidth]{rsa-oaep-res}
+  \caption{Resultado RSA\_OAEP}\label{fig:rsa-oaep}
+\end{figure}
+
+\begin{table}[ht]
+\centering{}
   \caption{Resultados RSA\_OAEP}\label{tab:rsa}
-  \begin{tabular}{|m{2cm}<{\centering}|m{2cm}<{\centering}|m{2cm}<{\centering}|}
+  \begin{tabular}{|c|c|c|}
     \rowcolor[HTML]{000000}
     {\color[HTML]{FFFFFF} nombre} & {\color[HTML]{FFFFFF} rsa-oaep-encrypt} & {\color[HTML]{FFFFFF} rsa-oaep-decrypt} \\
     vector\#1  & $\num{736.55E-06}$ & $\num{694.37E-06}$ \\ \hline
@@ -135,25 +176,29 @@ El modo ECB puede hacer que protocolos sin protección de integridad sean aún m
     \rowcolor[HTML]{C0C0C0}
     vector\#20 & $\num{398.33E-06}$ & $\num{750.11E-06}$ \\ \hline
   \end{tabular}
-\end{table*}
-\begin{figure}
-  \centering
-  \includegraphics[width=0.8\textwidth]{rsa-oaep-res}
-  \caption{Resultado RSA\_OAEP}\label{fig:rsa-oaep}
-\end{figure}
+\end{table}
+
 
 \newpage{}
 
 \subsubsection{Hashing}\label{sec:hash}
-En este apartado comparamos sumas hash, donde probamos con caracteres de diferente tamaño
+
+En este apartado comparamos sumas hash (tabla~\ref{tab:hash-res}), donde probamos con caracteres de diferente tamaño
 y dos tipos de binarios distintos, como es esperado, las operaciones de 384 bits son más eficientes
-que las operacionesde 512 bits. También es notoria la diferencia de tiempo de SHA-3 y SHA-2, siendo esta
+que las operaciones de 512 bits. También es notoria la diferencia de tiempo de SHA-3 y SHA-2, siendo esta
 última más veloz, sin embargo, el SHA-3 se puede implementar a través de hardware, por lo que
 entonces el SHA-3 puede ser igual de rápido e incluso más rápido que el SHA-2
-\begin{table*}[]
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.4\textwidth]{hash_res}
+  \caption{Resultado Hash}\label{fig:hash}
+\end{figure}
+
+\begin{table}[ht]
   \centering
   \caption{Resultados Hash}\label{tab:hash-res}
-  \begin{tabular}{|m{2cm}<{\centering}|m{2cm}<{\centering}|m{2cm}<{\centering}|m{2cm}<{\centering}|m{2cm}<{\centering}|}
+  \begin{tabular}{|c|c|c|c|c|}
     \hline
     \rowcolor[HTML]{000000}
     {\color[HTML]{FFFFFF} nombre} & {\color[HTML]{FFFFFF} sha2\_384} & {\color[HTML]{FFFFFF} sha2\_512} & {\color[HTML]{FFFFFF} sha3\_384} & {\color[HTML]{FFFFFF} sha3\_512} \\ \hline
@@ -171,19 +216,24 @@ entonces el SHA-3 puede ser igual de rápido e incluso más rápido que el SHA-2
     imagen de prueba           & $\num{224.56E-06}$ & $\num{209.05E-06}$ & $\num{523.27E-06}$ & $\num{466.85E-06}$ \\ \hline
     zip de prueba              & $\num{5.40E-03 }$  & $\num{5.07E-03 }$  & $\num{11.61E-03}$  & $\num{16.93E-03}$  \\ \hline
   \end{tabular}
-\end{table*}
-\begin{figure}
-  \centering
-  \includegraphics[width=0.8\textwidth]{hash_res}
-  \caption{Resultado Hash}\label{fig:hash}
-\end{figure}
+\end{table}
 
-\subsubsection{Firma y verificacion}\label{sec:firma-y-verificacion}
-\begin{table*}[]
+
+\newpage{}
+
+\subsubsection{Firma y verificación}\label{sec:firma-y-verificacion}
+
+Se comparó la eficiencia de firma y verificación de los algoritmos (tabla
+~\ref{tab:hash-res}) \textbf{RSA\_PSS}, \textbf{DSA} y \textbf{ECDSA\_PRIME}. Entre todos
+los algoritmos de firma y verificación esta claro que \textbf{DSA} es el más rápido de
+todos para dichas tareas, sin embargo, como se mencionó anteriormente en el
+apartado~\ref{sec:aes_res}, \textit{RSA} también sirve para cifrar y descifrar
+simplemente invirtiendo el orden en el que se utilizan los exponentes.
+\begin{table}[ht]
   \scriptsize
   \centering
   \caption{Resultados Firma y verificación}\label{tab:hash-res}
-  \begin{tabular}{|m{1.5cm}<{\centering}|m{1.3cm}<{\centering}|m{1.3cm}<{\centering}|m{1.3cm}<{\centering}|m{1.3cm}<{\centering}|m{1.3cm}<{\centering}|m{1.3cm}<{\centering}|m{1.3cm}<{\centering}|m{1.3cm}<{\centering}|}
+  \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
     \hline
     \rowcolor[HTML]{000000}
     {\color[HTML]{FFFFFF} nombre} &
@@ -198,7 +248,7 @@ entonces el SHA-3 puede ser igual de rápido e incluso más rápido que el SHA-2
     vector\#1  & $\num{2.59E-03}$ & $\num{4.64E-03}$ & $\num{4.07E-04}$ & $\num{7.80E-04}$ & $\num{5.22E-04}$ & $\num{2.95E-04}$ & $\num{9.19E-04}$ & $\num{2.70E-04}$ \\ \hline
     \rowcolor[HTML]{C0C0C0}
     vector\#2 & $\num{2.17E-03}$ & $\num{4.16E-03}$ & $\num{3.75E-04}$ & $\num{6.33E-04}$ & $\num{3.96E-04}$ & $\num{2.88E-04}$ & $\num{6.60E-04}$ & $\num{2.55E-04}$ \\ \hline
-    vector\#3 & $\num{2.17E-03}$ & $\num{4.51E-03}$ & $\num{4.96E-04}$ & $\num{6.53E-04}$ & $\num{4.77E-04}$ & $\num{2.84E-04}$ & $\num{6.74E-04}$ & $\num{2.70E-04}$ \\ \hline
+    vector\#3 & $\num{2.17E-03}$ & $\num{4.51E-03}$ & $\num{4.96E-04}$ & $\num{6.53E-04}$ & $\num{4.77E-04}$ & $\num{2.84E-04}$ & $\num{6.74E-04}$ & $\num{2.70 E-04}$ \\ \hline
     \rowcolor[HTML]{C0C0C0}
     vector\#4 & $\num{2.63E-03}$ & $\num{4.75E-03}$ & $\num{3.78E-04}$ & $\num{6.36E-04}$ & $\num{4.09E-04}$ & $\num{2.78E-04}$ & $\num{6.58E-04}$ & $\num{2.62E-04}$ \\ \hline
     vector\#5  & $\num{2.18E-03}$ & $\num{4.18E-03}$ & $\num{3.44E-04}$ & $\num{6.47E-04}$ & $\num{4.33E-04}$ & $\num{2.82E-04}$ & $\num{6.63E-04}$ & $\num{2.66E-04}$ \\ \hline
@@ -226,15 +276,39 @@ entonces el SHA-3 puede ser igual de rápido e incluso más rápido que el SHA-2
     \rowcolor[HTML]{C0C0C0}
     vector\#20 & $\num{2.26E-03}$ & $\num{4.99E-03}$ & $\num{4.13E-04}$ & $\num{6.78E-04}$ & $\num{3.99E-04}$ & $\num{2.93E-04}$ & $\num{6.97E-04}$ & $\num{2.74E-04}$ \\ \hline
   \end{tabular}
-\end{table*}
-\begin{figure}
+\end{table}
+
+Comparando \textit{RSA} con \textit{ECDSA} (se aprecia mejor en la figura~\ref{fig:fyv}),
+esta última es más lenta (para niveles de seguridad más altos), no obstante esto no
+significa que \textit{RSA} sea malo, las firmas \textit{ECDSA} como las claves públicas
+son mucho más pequeñas que las firmas \textit{RSA} y las claves públicas de niveles de
+seguridad similares. Si compara una curva \textit{ECDSA} de 192 bits con una clave RSA de
+1k (que tienen aproximadamente el mismo nivel de seguridad; la curva \textit{ECDSA} de
+192 bits es probablemente un poco más fuerte); luego, la firma \textit{RSA} y la clave
+pública se pueden expresar en 128 bytes cada una (suponiendo que esté dispuesto a usar un
+formato que ahorre espacio para la clave pública, en lugar de usar el formato PKCS
+estándar); la firma ECDSA sería de 48 bytes y la clave pública sería de 25 bytes.
+\begin{figure}[ht]\centering
+
+\begin{subfigure}[b]{0.5\textwidth}
   \centering
-  \includegraphics[width=0.8\textwidth]{rsa_sign_verif_res}
+  \includegraphics[width=\textwidth]{rsa_sign_verif_res}
   \caption{Resultado Firma y verificación}\label{fig:fyv}
-\end{figure}
-\begin{figure}
+\end{subfigure}
+\hfill{}
+\begin{subfigure}[b]{0.45\textwidth}
   \centering
-  \includegraphics[width=0.8\textwidth]{rsa_sign_verif-bin_res}
+  \includegraphics[width=\textwidth]{rsa_sign_verif-bin_res}
   \caption{Resultado Firma y verificación (binario)}\label{fig:fyvbin}
+\end{subfigure}
+\caption{Gráficas de firma y verificación}\label{fig:fv}
 \end{figure}
+
+A medida que aumenta el nivel de seguridad requerido, la ventaja se inclina aún más
+radicalmente hacia \textit{ECDSA}, eso se debe a que debe aumentar el tamaño del módulo
+\textit{RSA} mucho más rápido que el tamaño de la curva \textit{ECDSA} para aumentar el
+nivel de seguridad.
+
+
+
 \end{document}
