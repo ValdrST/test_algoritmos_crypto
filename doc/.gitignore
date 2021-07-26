@@ -11,6 +11,9 @@ tmp/
 *.synctex.gz
 *.toc
 *.pdf
+*.lof
+*.lol
+*.lot
 
 _minted-main/
 *.bbl
