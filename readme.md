@@ -1,4 +1,4 @@
-# Test de algoritmos criptograficos
+# Test de algoritmos criptográficos
 
 ## Instrucciones de uso 
 
@@ -9,15 +9,15 @@ Se corre el siguiente comando la primera ves que se utiliza
 $ docker-compose build
 ```
 
-Se corre el siguente comando cada que se quiera ejecutar
+Se corre el siguiente comando cada que se quiera ejecutar
 ```
 $ docker-compose up
 ```
-Los resultados de la ejecucion se encontrarán en el directorio [results](./results)
+Los resultados de la ejecución se encontrarán en el directorio [results](./results)
 
 ## Descripción
 
-Es un proyecto para la materia de criptografia semestere 2021-2
+Es un proyecto para la materia de criptografía semestre 2021-2
 
 ### Contenido
 
@@ -37,16 +37,16 @@ Es un proyecto para la materia de criptografia semestere 2021-2
 #### Operaciones a probar
 
 * Cifrado
-* Decifrado
+* Descifrado
 * Hashing
 * Firmado
 * Verificación
 
-### Clasificaciòn de operaciones
+### Clasificación de operaciones
 
-#### Cifrado y decifrado
+#### Cifrado y descifrado
 
-En esta clasificaciòn se encuentran:
+En esta clasificación se encuentran:
 
 * AES-EBC 256 bits
 * AES-CBC 256 bits
@@ -56,15 +56,15 @@ Este ultimo no es comparable con AES-EBC y CBC
 
 #### Hashing
 
-En esta clasificaciòn se encuentra:
+En esta clasificación se encuentra:
 
 * SHA-2 384 bits
 * SHA-2 512 bits
 * SHA-3 512 bits
 
-#### Firma y verificacion
+#### Firma y verificación
 
-Aqui se encuentran:
+Aquí se encuentran:
 
 * RSA-PSS 1024 bits
 * DSA 1024 bits
