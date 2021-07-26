@@ -1,0 +1,10 @@
+.DS_Store
+.idea
+*.log
+tmp/
+
+*.el
+*.aux
+*.out
+*.log
+.auctex-auto/
