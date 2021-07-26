@@ -1,25 +1,59 @@
-\documentclass{IEEEtran}
+\documentclass[onecolumn]{IEEEtran}
 
 \include{meta/conf}
+
 \usepackage{authblk}
+\usepackage[backend=biber,style=ieee]{biblatex}
+\addbibresource{./main.bib}
 
 \begin{document}
-\title{Un título    }
+
+\include{portada}
+
+\title{Proyecto Final}
 \author{
   \IEEEauthorblockN{
     Romero Andrade Cristian\IEEEauthorrefmark{1},
     Romero Andrade Vicente\IEEEauthorrefmark{2},
-    Author Three\IEEEauthorrefmark{3} and
-    Author Four\IEEEauthorrefmark{4}
+    Machicao Cardoso Raúl Fernando\IEEEauthorrefmark{3} y
+    Martínez López Andrés\IEEEauthorrefmark{4}
   }
-  \IEEEauthorblockA{Department of Whatever,
+  \IEEEauthorblockA{Criptografía,
     Facultad de Ingeniería\\
     Email: \IEEEauthorrefmark{1}\href{mailto:cristian.romero@comunidad.unam.mx}{cristian.romero@comunidad.unam.mx},
     \IEEEauthorrefmark{2}\href{mailto:dark_reggae_93@comunidad.unam.mx}{dark\_reggae\_93@comunidad.unam.mx},
-    \IEEEauthorrefmark{3}author.three@add.on.net,
-    \IEEEauthorrefmark{4}author.four@add.on.net}}
+    \IEEEauthorrefmark{3}\href{mailto:laastar@comunidad.unam.mx}{laastar@comunidad.unam.mx},
+    \IEEEauthorrefmark{4}\href{mailto:bockerlaila@comunidad.unam.mx}{bockerlaila@comunidad.unam.mx}}}
 
 \maketitle{}
 
+\tableofcontents{}
+
+\subfile{./secciones/introduccion.tex}
+
+\newpage{}
+
+\subfile{./secciones/desarrollo.tex}
+
+\newpage{}
+
+\section{Conclusiones}\label{sec:concluciones}
+
+Comparamos varios algoritmos, cada uno para una o unas tareas especificas, si bien
+unos destacan en su velocidad, no cabe duda que pueden llegar a sacrificar robustes
+(tal como pasó con SHA--1 en su momento). Unos algoritmos son más nuevos que otros, por
+lo cual los más recientes tienen ciertos antecedentes que benefician para su diseño teniendo
+una excelente relación velocidad---seguridad.
+
+\nocite{*}
+
+\newpage{}
+
+\listoffigures{}
+\listoftables{}
+\listoflistings{}
+
+\addcontentsline{toc}{section}{Referencias}
+\printbibliography{}
 
 \end{document}

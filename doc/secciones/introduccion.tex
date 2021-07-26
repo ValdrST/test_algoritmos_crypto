@@ -1,0 +1,96 @@
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+\section{Introducción}\label{sec:introduccion}
+
+El presente trabajo se analizan distintos metodos criptofráficos
+para ciertas tareas como \textbf{cifrado}, \textbf{descifrado},
+\textbf{hash}, \textbf{firma} y \textbf{verificación}. Estos
+métodos tienen distintos algoritmos que cumplen la misma función,
+sin embargo cada una de ellas tienen sus ventajas y desventajas la
+cual es el objetivo de este escrito.
+
+Los algoritmos ya clasificados que utilizaremos son los siguientes:
+
+\subsection{Estándar de cifrado avanzado (AES por sus siglas en ingles)}\label{sec:estandar-de-cifrado-1}
+Son algoritmos matemáticos o cifrados utilizados para ocultar
+la información de manera que no pueda ser leída por los usuarios de
+computadoras no autorizadas cuando se almacena o en tránsito.
+Advanced Encryption Standard es un algoritmo simétrico, lo que significa
+que utiliza una sola clave para cifrar y descifrar los mensajes. Una
+persona debe tener en cuenta que una clave es simplemente una variable
+inserta en el algoritmo selecciona aleatoriamente a los datos. Desde
+AES se basa en una sola clave para hacer ambas tareas, es imperativo
+que la clave sigue siendo secreto. Si un usuario no autorizado fue
+capaz de obtener la clave, él sería capaz de leer todos los mensajes cifrados.
+\begin{itemize}
+  \item AES-EBC 256 bits\\
+        ECB (Electronic Codebook) es esencialmente la primera generación del AES.\@
+        Es la forma más básica de cifrado de bloques.
+  \item AES-CBC 256 bits\\
+        CBC (Cipher Blocker Chaining) es una forma avanzada de cifrado de cifrado de bloques.
+        Con el cifrado en modo CBC, cada bloque de texto cifrado depende de todos los bloques
+        de texto plano procesados hasta ese momento. Esto agrega un nivel adicional de
+        complejidad a los datos cifrados.
+
+  \item RSA-OAEP 1024 bits\\
+        RSAES-OAEP es un esquema de cifrado de clave pública que combina el algoritmo RSA
+        con el método Optimal Asymmetric Encryption Padding (OAEP)
+\end{itemize}
+
+\subsection{Algoritmo hash seguro (SHA)}\label{sec:algor-hash-seguro-1}
+
+\begin{itemize}
+  \item SHA-2 384 bits
+  \item SHA-2 512 bits
+  \item SHA-3 384 bits
+  \item SHA-3 512 bits
+\end{itemize}
+SHA-2 es un conjunto de funciones de hash criptográficas diseñadas por
+la NSA\footnote{\textbf{A}gencia de \textbf{S}eguridad \textbf{N}acional de los Estados Unido} y
+publicadas por primera vez en 2001. Se construyen utilizando la construcción Merkle-Damgård, de
+una función de compresión unidireccional construida en sí misma utilizando la estructura
+Davies-Meyer a partir de un cifrado de bloques especializado.
+
+SHA-3 es el miembro más reciente de la familia de estándares Secure
+Hash Algorithm, publicado por NIST el 5 de agosto de 2015. Aunque forma parte de la
+misma serie de estándares, SHA-3 es internamente diferente de la estructura similar a MD5 de
+SHA-1 y SHA-2.  Es un algoritmo hash completamente nuevo que no tiene nada que ver con SHA-1 y SHA-2.
+
+SHA-3 es una familia de funciones hash criptográficas especificadas en los Estándares federales
+de procesamiento de información (FIPS) 202. Son hashes de permutación basados en el algoritmo KECCAK.\@
+
+Del documento estándar:\\
+La familia SHA-3 consta de cuatro funciones hash criptográficas, llamadas SHA3--224, SHA3--256,
+SHA3--384 y SHA3--512, y dos funciones de salida extensible (XOF), llamadas SHAKE128 y SHAKE256.
+En términos de alto nivel, las funciones hash SHA-3 transforman una cadena de entrada en una matriz
+de estado multidimensional, luego realizan una serie de rondas de permutaciones en esa matriz de
+estado que consisten en la aplicación secuencial de 5 funciones de permutación diferentes y luego
+extraen una cadena de salida de longitud de esa matriz de estado. Los detalles de cómo realizar las
+conversiones, cuántas rondas hacer y cuáles son las funciones de permutación se explican en el documento estándar.
+
+\subsection{Firma y verificacion}\label{sec:firma-y-verificacion-2}
+\begin{itemize}
+  \item RSA-PSS 1024 bits\\
+        El esquema de firma probabilística (PSS) o procedimiento de firma probabilística es un procedimiento
+        de relleno criptográfico desarrollado por Mihir Bellare y Phillip Rogaway. En el modelo de oráculo
+        aleatorio, se puede construir un proceso de firma seguro y verificable con el PSS a partir de una
+        permutación de trampilla. En 1996, Bellare y Rogaway describieron la combinación de PSS con RSA
+        como una permutación de trampilla en su artículo. En el modelo de oráculo aleatorio, RSA-PSS es
+        existencialmente imposible de falsificar bajo ataques de mensajes elegidos (EUF-CMA)
+        bajo la suposición de RSA.\@
+  \item DSA 1024 bits\\
+        El algoritmo de firma digital (DSA) es un estándar del gobierno de Estados Unidos para firmas digitales.
+        El DSA se basa en el logaritmo discreto en campos finitos. Se basa en el proceso de firma de Elgamal y está
+        relacionado con la firma de Schnorr. La transferencia del DSA a curvas elípticas se denomina ECDSA
+        (algoritmo de firma digital de curva elíptica) y está estandarizado en ANSI X9.62.
+  \item ECDSA Prime Field 521 bits
+  \item ECDSA Binary Field 571 bits
+        Es una modificación del algoritmo DSA que emplea operaciones sobre puntos de curvas elípticas en lugar
+        de las exponenciaciones que usa DSA La principal ventaja de este esquema es que requiere números de
+        tamaños menores para brindar la misma seguridad que DSA o RSA.\@
+\end{itemize}
+
+
+
+
+\end{document}
