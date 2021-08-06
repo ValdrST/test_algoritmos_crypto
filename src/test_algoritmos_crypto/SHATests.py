@@ -21,6 +21,9 @@ class SHATests(object):
     def armarResultado(self, tiempo, nombre, tipo):
       self.res[tipo] = tiempo
 
+    def correrPruebaTotal(self, tiempos=1000):
+        for i in range(tiempos):
+            self.correrPrueba()
 
     def correrPrueba(self):
         for vector in self.vectores:

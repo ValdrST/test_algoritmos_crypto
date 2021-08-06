@@ -108,7 +108,9 @@ class SignVerifTests(object):
     tiempo = end - start
     return tiempo
 
-
+  def correrPruebaTotal(self, tiempos=1000):
+    for i in range(tiempos):
+        self.correrPrueba()
 
   def correrPrueba(self):
     for vector in self.vectores:

@@ -42,6 +42,9 @@ class AESTests(object):
       decipher = AES.new(key, AES.MODE_ECB)
       return unpad(decipher.decrypt(ct), AES.block_size)
 
+    def correrPruebaTotal(self, tiempos=1000):
+      for i in range(tiempos):
+        self.correrPrueba()
 
     def correrPrueba(self):
       for vector in self.vectores:
