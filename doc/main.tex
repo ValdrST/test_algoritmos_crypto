@@ -35,23 +35,36 @@
 
 \subfile{./secciones/desarrollo.tex}
 
-\newpage{}
+\clearpage{}
 
 \section{Conclusiones}\label{sec:concluciones}
+Para el presente trabajo comparamos varios algoritmos desde AES, pasando por SHA hasta las de curva elíptica como ECDSA, cada uno para una o unas tareas específicas. En principio al entender que cada uno de estos algoritmos se enfocan en diferentes objetivos los cuales podemos definir en tres métodos principales como 1) Cifrado y descifrado; 2) Hashing; y 3) Firma y Verificación, es como podemos entender y realizar las pruebas necesarias para evaluar que tan eficaces son dichos algoritmos.
 
-Comparamos varios algoritmos, cada uno para una o unas tareas especificas, si bien
-unos destacan en su velocidad, no cabe duda que pueden llegar a sacrificar robustes
-(tal como pasó con SHA--1 en su momento). Unos algoritmos son más nuevos que otros, por
-lo cual los más recientes tienen ciertos antecedentes que benefician para su diseño teniendo
-una excelente relación velocidad---seguridad.
+Empezando por el método de Cifrado y Descifrado, tenemos a los algoritmos AES, los cuales en esta ocasión tenemos a AES-CBC y AES-ECB los cuales fueron puestos a prueba con algunos de los tipos de archivo más comunes (vectores, pdf, imagen y zip) en la cual se observó que el algoritmo AES-CBC tanto para cifrar como descifrar tarda más tiempo que el de AES-ECB, lo cual nos indica que este ultimo sacrifica seguridad para obtener una respuesta de cálculo más rápida.
 
+Siguiendo dentro del mismo método, tenemos a los algoritmos RSA-OAEP, los cuales fueron puestos a prueba con 20 vectores para tener una muestra significativa que pudiera arrojarnos un resultado confiable, dichos vectores fueron conformados por un modulo y un exponente privado (llave privada) de gran tamaño; un exponente público (llave pública) de tamaño pequeño; y el dato de tamaños variables para cada uno de dichos vectores. Así, de esta manera observamos que tanto para el cifrado como descifrado logran mantener un tiempo relativamente constante, en donde se lleva mayor tiempo descifrar, lo cual nos indica que estos algoritmos son mucho más estables y ofrecen una mayor seguridad a los AES, ya que en el tiempo es directamente proporcional al cifrar y descifrar, aunque cabe destacar que es más lento.
+
+Pasando al método de Hashing tenemos a los algoritmos SHA-2 (384 y 512 bits) y SHA-3 (384 y 512 bits), los cuales fueron probados con los mismos archivos que en AES, en donde es observable que los algoritmos SHA-2 son más rápidos que los SHA-3, y del mismo modo, son más rápidos los de 384 bits que los de 512 bits. Sin embargo, como se mencionó anteriormente el SHA-3 se puede implementar a través de hardware, por lo que entonces el SHA-3 puede ser igual de rápido e incluso más rápido que el SHA-2.
+
+Teniendo finalmente el método de Firma y Verificación con los algoritmos RSA-PSS, DSA y ECDSA (Prime field y Binary field), dichos algoritmos al igual que con los RSA-OAEP, fueron puestos aprueba con 20 vectores formados como se mencionó anteriormente, con lo cual de manera general fue observable que para los algoritmos que no implican curvas elípticas (todos excepto los ECDSA) verificar el dato es más rápido que firmarlo, así mismo el tiempo de verificación para RSA-PSS y DSA es prácticamente el mismo, mientras que para la firma es más rápido el DSA. Pasando a los algoritmos ECDSA observamos que la firma es más rápida que la verificación (siendo más lento los del campo binario), lo cual nos indica que efectivamente el uso de curvas elípticas garantiza una mayor seguridad en comparación a los algoritmos que utilizan exponenciales.
+
+Una vez analizado los diferentes algoritmos en este trabajo, podemos decir que, si bien algunos de estos algoritmos destacan en su velocidad, no cabe duda que pueden llegar a sacrificar robustez (tal como pasó con SHA–1 en su momento). Unos algoritmos son más nuevos que otros, por lo cual los más recientes tienen ciertos antecedentes que benefician para su diseño teniendo una excelente relación velocidad—seguridad.
+
+En conclusión, los diversos tipos de algoritmos ofrecen diferentes características las cuales dependiendo de lo que busquemos, ya sea mayor velocidad, mayor seguridad, mayor veracidad, etc. Es como debemos elegirlos y aplicarlos, ya que debemos buscar lo que nos de mayor eficiencia posible sin arriesgar tanto, es por eso que como se observó en el presente trabajo, para cada tipo de archivo que nosotros encriptemos o firmemos corresponderá al tiempo en el que se descifra o verifica el archivo, de esta forma con las pruebas realizadas y con los diferentes parámetros con los que se probaron los algoritmos AES, RSA, SHA-2, SHA-3, DSA y ECDSA es como podemos optar por un método de encriptación que nos garantice la autenticidad de nuestros archivos.
 \nocite{*}
 
 \newpage{}
 
+\section*{Anexos}
+\addcontentsline{toc}{section}{Anexos}
+
 \listoffigures{}
 \listoftables{}
 \listoflistings{}
+\bigskip{}
+\faGithub~\href{https://github.com/ValdrST/test_algoritmos_crypto}{Enlace al repositorio}
+\dotfill
+\href{https://github.com/ValdrST/test_algoritmos_crypto}{https://github.com/ValdrST/test\_algoritmos\_crypto}
 
 \addcontentsline{toc}{section}{Referencias}
 \printbibliography{}
