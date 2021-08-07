@@ -7,6 +7,7 @@ Es un proyecto para la materia de criptografia semestere 2021-2
 * AES-CBC 256 bits
 * SHA-2 384 bits
 * SHA-2 512 bits
+* SHA-3 384 bits
 * SHA-3 512 bits
 * RSA-OAEP 1024 bits
 * RSA-PSS 1024 bits
