@@ -1,5 +1,6 @@
 import pandas as pd
 import math
+from os import path
 
 class TestVector(object):
     def __init__(self, tipo='sha', archivoVectores='vectores.txt', dirVectores='./'):
@@ -9,7 +10,7 @@ class TestVector(object):
         self.dir = dirVectores
     
     def leerArchivo(self, archivo):
-        with open(self.dir + archivo, 'rb') as f:
+        with open(path.join(self.dir,archivo), 'rb') as f:
             return f.read()
 
 
@@ -31,7 +32,7 @@ class TestVector(object):
                 'modulo':row['modulo'],
                 'exponente_publico':row['exponente_publico'],
                 'exponente_privado':row['exponente_privado'],
-                'vector':row['datos'],
+                'vector':bytes.fromhex(row['datos']),
                 }
                 self.datos.append(vector)
                 c += 1

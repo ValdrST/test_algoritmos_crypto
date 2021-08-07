@@ -1,0 +1,76 @@
+\usepackage[left=1.5cm,right=1.5cm]{geometry}
+\usepackage[
+spanish,
+es-nodecimaldot,
+es-tabla
+%english
+]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{float}
+\usepackage{crossreftools}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{minted}
+\usepackage{subfiles}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[acronym, toc]{glossaries}
+
+
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{multicol}
+\usepackage{tabularx,booktabs}
+\usepackage{siunitx}
+
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{caption}
+
+\definecolor{LightGray}{gray}{0.9}
+\definecolor{DarkGray}{HTML}{191919}
+\definecolor{custom}{HTML}{F8F8F8}
+
+\newenvironment{code}{\captionsetup{type=listing}}{}
+
+\usemintedstyle{emacs}
+
+\usepackage[ruled,vlined]{algorithm2e}
+
+
+\renewcommand{\listingscaption}{Código}
+\renewcommand\listoflistingscaption{Índice de \listingscaption\@s}
+
+\setminted[python]{frame=single,framesep=3mm,baselinestretch=0.9,breaklines=true,bgcolor=custom,fontsize=\scriptsize,linenos}
+\setminted[shell-session]{frame=single,framesep=1mm,baselinestretch=0.5,breaklines=true,bgcolor=custom,fontsize=\scriptsize}
+\graphicspath{
+  {./img_common}
+  {./img}
+}
+% \usepackage[T1]{fontenc}
+% \renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
+
+% \pagestyle{fancy}
+% \fancyfoot[R]{\thepage}
+% \fancyfoot[C]{\includegraphics[width=0.05\textwidth]{inge_logo}}
+% \fancyhead[L]{\leftmark}
+% \fancyhead[R]{\rightmark}

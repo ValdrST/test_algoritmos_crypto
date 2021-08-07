@@ -1,10 +1,11 @@
 from pandas import DataFrame
 import pandas as pd
+from os import path
 
 class Results(object):
     def __init__(self, dirResultados='/results/', nombre='resultados.csv'):
         self.dir = dirResultados
-        self.ruta_resultados = self.dir+nombre
+        self.ruta_resultados = path.join(self.dir,nombre)
         self.datos = DataFrame()
     
     def añadirResultado(self, datos:dict):
