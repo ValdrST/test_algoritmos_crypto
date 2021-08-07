@@ -82,6 +82,7 @@ En esta clasificación se encuentra:
 
 * SHA-2 384 bits
 * SHA-2 512 bits
+* SHA-3 384 bits
 * SHA-3 512 bits
 
 #### Firma y verificación
