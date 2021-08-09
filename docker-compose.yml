@@ -10,6 +10,9 @@ services:
       - ./entrypoint:/entrypoint
       - ./test_vectors:/test_vectors
     entrypoint: ["/bin/sh","/entrypoint/run.sh"]
+    environment:
+      PYTHONUNBUFFERED: 1
+      PYTHONIOENCODING: UTF-8
 networks:
   prueba-crypto:
       driver: bridge

@@ -5,6 +5,7 @@ import time
 from os import path
 from .TestVector import TestVector
 from .Results import Results
+import logging
 
 class RSAOAEPTest(object):
     def __init__(self,test_folder='/tests_vectors/', out_folder='./'):
@@ -12,6 +13,7 @@ class RSAOAEPTest(object):
             'rsa-oaep-encrypt':[],
             'rsa-oaep-decrypt':[]
         }
+        self.nombre = "prueba Cifrado y descifrado RSA-OAEP"
         tv = TestVector(dirVectores=test_folder,archivoVectores= path.join(test_folder,'rsa_oaep_test_vectors.csv'),tipo='rsa_padding')
         tv.parseVectores()
         self.vectores = tv.datos
@@ -40,6 +42,13 @@ class RSAOAEPTest(object):
       tiempo = end - start
       return tiempo
 
+    def correrPruebaTotal(self, tiempos=1000):
+      for i in range(tiempos):
+        logging.info("Iteracion {} de la {}".format(i+1, self.nombre))
+        print("Iteracion {} de la {}".format(i+1, self.nombre))
+        self.correrPrueba()
+      self.resultados.escribirResultados()
+
 
     def correrPrueba(self):
       for vector in self.vectores:
@@ -53,7 +62,7 @@ class RSAOAEPTest(object):
         tiempo = self.rsa_oaep_decrypt(ct, key)
         self.armarResultado(tiempo, vector['nombre'],'rsa-oaep-decrypt')
         self.resultados.añadirResultado(self.res)
-      self.resultados.escribirResultados()
+      
 
 
 

@@ -6,6 +6,7 @@ import time
 from os import path
 from .TestVector import TestVector
 from .Results import Results
+import logging
 
 class AESTests(object):
     def __init__(self,test_folder='/tests_vectors/', out_folder='./'):
@@ -15,6 +16,7 @@ class AESTests(object):
             'aes-ecb-decrypt':[],
             'aes-cbc-decrypt':[],
         }
+        self.nombre = "prueba Cifrado y descifrado AES"
         tv = TestVector(dirVectores=test_folder,archivoVectores= path.join(test_folder,'aes_256_ebc-cbc_vectors.csv'),tipo='aes')
         tv.parseVectores()
         self.vectores = tv.datos
@@ -42,6 +44,12 @@ class AESTests(object):
       decipher = AES.new(key, AES.MODE_ECB)
       return unpad(decipher.decrypt(ct), AES.block_size)
 
+    def correrPruebaTotal(self, tiempos=1000):
+      for i in range(tiempos):
+        logging.info("Iteracion {} de la {}".format(i+1, self.nombre))
+        print("Iteracion {} de la {}".format(i+1, self.nombre))
+        self.correrPrueba()
+      self.resultados.escribirResultados()
 
     def correrPrueba(self):
       for vector in self.vectores:
@@ -71,9 +79,6 @@ class AESTests(object):
         tiempo = end - start
         self.armarResultado(tiempo, vector['nombre'],'aes-ecb-decrypt')
         self.resultados.añadirResultado(self.res)
-      self.resultados.escribirResultados()
-
-
 
 if __name__ == '__main__':
   at = AESTests('../../test_vectors/')

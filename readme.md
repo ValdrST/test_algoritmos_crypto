@@ -15,6 +15,27 @@ $ docker-compose up
 ```
 Los resultados de la ejecución se encontrarán en el directorio [results](./results)
 
+## Instucciones de uso alternativas
+
+Si no se desea usar docker se puede optar por instalarlo con python nativo 
+
+Se recomienda tener python 3.8 o superior
+
+En la raiz del directorio [src](src) se ejecuta el comando:
+
+```bash
+$ pip install .
+```
+
+Luego se retorna esta [raiz](/)  y se ejecuta el siguiente comando 
+
+```
+$ test-algoritmos-crypto --out-folder ./results --test-folder ./test_vectors --num-iteraciones 10
+```
+en `--num-iteraciones` se pueden definir cuantas iteraciones se desan ejecutar
+
+Los resultados se pueden encontrar en el directorio [results](results/)
+
 ## Descripción
 
 Es un proyecto para la materia de criptografía semestre 2021-2
@@ -27,6 +48,7 @@ Es un proyecto para la materia de criptografía semestre 2021-2
 * AES-CBC 256 bits
 * SHA-2 384 bits
 * SHA-2 512 bits
+* SHA-3 384 bits
 * SHA-3 512 bits
 * RSA-OAEP 1024 bits
 * RSA-PSS 1024 bits
@@ -60,6 +82,7 @@ En esta clasificación se encuentra:
 
 * SHA-2 384 bits
 * SHA-2 512 bits
+* SHA-3 384 bits
 * SHA-3 512 bits
 
 #### Firma y verificación
