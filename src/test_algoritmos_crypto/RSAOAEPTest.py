@@ -1,3 +1,4 @@
+from tqdm import tqdm
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import PKCS1_OAEP
 from Crypto import Random
@@ -43,9 +44,10 @@ class RSAOAEPTest(object):
       return tiempo
 
     def correrPruebaTotal(self, tiempos=1000):
-      for i in range(tiempos):
+      pbar = tqdm(range(tiempos))
+      for i in pbar:
         logging.info("Iteracion {} de la {}".format(i+1, self.nombre))
-        print("Iteracion {} de la {}".format(i+1, self.nombre))
+        pbar.set_description("Iteracion {} de la {}".format(i+1, self.nombre))
         self.correrPrueba()
       self.resultados.escribirResultados()
 
@@ -69,4 +71,3 @@ class RSAOAEPTest(object):
 if __name__ == '__main__':
   at = RSAOAEPTest('../../test_vectors/')
   at.correrPrueba()
-    
