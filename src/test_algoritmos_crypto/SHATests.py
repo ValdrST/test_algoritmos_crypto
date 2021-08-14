@@ -1,3 +1,4 @@
+from tqdm import tqdm
 import hashlib
 import time
 from os import path
@@ -24,9 +25,10 @@ class SHATests(object):
       self.res[tipo] = tiempo
 
     def correrPruebaTotal(self, tiempos=10):
-        for i in range(tiempos):
+        pbar = tqdm(range(tiempos))
+        for i in pbar:
             logging.info("Iteracion {} de la {}".format(i+1, self.nombre))
-            print("Iteracion {} de la {}".format(i+1, self.nombre))
+            pbar.set_description("Iteracion {} de la {}".format(i+1, self.nombre))
             self.correrPrueba()
         self.resultados.escribirResultados()
 
@@ -61,4 +63,3 @@ class SHATests(object):
 if __name__ == '__main__':
     st = SHATests('../../test_vectors/')
     st.correrPrueba()
-    

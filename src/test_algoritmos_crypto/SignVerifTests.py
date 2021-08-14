@@ -1,3 +1,4 @@
+from tqdm import tqdm
 import time
 import csv
 from Crypto.Signature import pss
@@ -111,9 +112,10 @@ class SignVerifTests(object):
     return tiempo
 
   def correrPruebaTotal(self, tiempos=1000):
-    for i in range(tiempos):
+    pbar = tqdm(range(tiempos))
+    for i in pbar:
         logging.info("Iteracion {} de la {}".format(i+1, self.nombre))
-        print("Iteracion {} de la {}".format(i+1, self.nombre))
+        pbar.set_description("Iteracion {} de la {}".format(i+1, self.nombre))
         self.correrPrueba()
     self.resultados.escribirResultados()
     
@@ -154,4 +156,3 @@ class SignVerifTests(object):
 if __name__ == '__main__':
   sv = SignVerifTests('../../test_vectors/')
   sv.correrPrueba()
-    

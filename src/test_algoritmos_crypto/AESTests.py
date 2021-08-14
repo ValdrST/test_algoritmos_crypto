@@ -1,3 +1,4 @@
+from tqdm import tqdm
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad
 from Crypto.Util.Padding import unpad
@@ -45,9 +46,10 @@ class AESTests(object):
       return unpad(decipher.decrypt(ct), AES.block_size)
 
     def correrPruebaTotal(self, tiempos=1000):
-      for i in range(tiempos):
+      pbar = tqdm(range(tiempos))
+      for i in pbar:
         logging.info("Iteracion {} de la {}".format(i+1, self.nombre))
-        print("Iteracion {} de la {}".format(i+1, self.nombre))
+        pbar.set_description("Iteracion {} de la {}".format(i+1, self.nombre))
         self.correrPrueba()
       self.resultados.escribirResultados()
 
@@ -83,4 +85,3 @@ class AESTests(object):
 if __name__ == '__main__':
   at = AESTests('../../test_vectors/')
   at.correrPrueba()
-    
